@@ -32,7 +32,7 @@ public final class RestClient {
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 
         // add logging as last interceptor
-        //httpClient.addInterceptor(logging);
+        httpClient.addInterceptor(logging);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BuildConfig.API_URL)
