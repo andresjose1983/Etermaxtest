@@ -14,8 +14,7 @@ public interface IMainPresenter {
 
     void showError(String error);
 
-    void showProgressbar();
-
     void hideProgressBar();
 
+    void hideProgressBarByPage();
 }

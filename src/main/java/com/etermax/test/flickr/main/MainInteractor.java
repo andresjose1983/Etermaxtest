@@ -1,11 +1,9 @@
 package com.etermax.test.flickr.main;
 
-import com.etermax.test.flickr.model.PhotoResponse;
 import com.etermax.test.flickr.model.PhotosHeader;
 import com.etermax.test.flickr.service.RestClient;
 
 import java.io.IOException;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,26 +22,30 @@ public class MainInteractor {
         getPhotosByPage(1);
     }
 
-    public void getPhotosByPage(final int page){
-        mIMainPresenter.showProgressbar();
+    public void getPhotosByPage(final int page) {
         try {
             Call<PhotosHeader> photos = RestClient.getPhotos(page);
             photos.enqueue(new Callback<PhotosHeader>() {
                 @Override
                 public void onResponse(Call<PhotosHeader> call, Response<PhotosHeader> response) {
-                    mIMainPresenter.hideProgressBar();
                     mIMainPresenter.showPhotosByPage(response.body().getPhotos());
+                    hideProgressbar();
                 }
 
                 @Override
                 public void onFailure(Call<PhotosHeader> call, Throwable t) {
-                    mIMainPresenter.hideProgressBar();
                     mIMainPresenter.showError(t.getMessage());
+                    hideProgressbar();
                 }
             });
         } catch (IOException e) {
-            mIMainPresenter.hideProgressBar();
             mIMainPresenter.showError(e.getMessage());
+            hideProgressbar();
         }
+    }
+
+    private void hideProgressbar() {
+        mIMainPresenter.hideProgressBar();
+        mIMainPresenter.hideProgressBarByPage();
     }
 }

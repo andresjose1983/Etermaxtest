@@ -16,5 +16,9 @@ public interface IMain {
 
     void hideProgressBar();
 
-    void showProgressbar();
+    void showProgressBar();
+
+    void showProgressBarByPage();
+
+    void hideProgressBarByPage();
 }

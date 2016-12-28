@@ -11,13 +11,15 @@ public class MainPresenter implements IMainPresenter {
     private IMain mIMain;
     private MainInteractor mMainInteractor;
 
-    public MainPresenter(IMain mIMain) {
-        this.mIMain = mIMain;
+    public MainPresenter(IMain iMain) {
+        mIMain = iMain;
         mMainInteractor = new MainInteractor(this);
+        mIMain.showProgressBar();
     }
 
     @Override
     public void getPhotosByPage(int page) {
+        mIMain.showProgressBarByPage();
         mMainInteractor.getPhotosByPage(page);
     }
 
@@ -33,12 +35,12 @@ public class MainPresenter implements IMainPresenter {
     }
 
     @Override
-    public void showProgressbar() {
-        mIMain.showProgressbar();
+    public void hideProgressBar() {
+        mIMain.hideProgressBar();
     }
 
     @Override
-    public void hideProgressBar() {
-        mIMain.hideProgressBar();
+    public void hideProgressBarByPage() {
+        mIMain.hideProgressBarByPage();
     }
 }

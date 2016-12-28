@@ -33,8 +33,8 @@ public class PhotosAdapter extends RecyclerView.Adapter<PhotosAdapter.PhotoViewH
     }
 
     public void setPhotos(List<Photo> photos) {
-        mPhotos = photos;
-        notifyDataSetChanged();
+        mPhotos.addAll(photos);
+        notifyItemRangeInserted((mPhotos.size() - photos.size()) - 1 , photos.size());
     }
 
     @Override
@@ -59,8 +59,7 @@ public class PhotosAdapter extends RecyclerView.Adapter<PhotosAdapter.PhotoViewH
                 .append(photo.getSecret())
                 .append(".jpg");
         Glide.with(holder.mIvPhoto.getContext()).load(url.toString())
-                .override(mSpan, mSpan).centerCrop()
-                .skipMemoryCache(true).crossFade(500).into(holder.mIvPhoto);
+                .override(mSpan, mSpan).centerCrop().crossFade(500).into(holder.mIvPhoto);
     }
 
     @Override

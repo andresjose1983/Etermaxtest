@@ -24,12 +24,15 @@ public class MainActivity extends AppCompatActivity implements IMain {
 
     @BindView(R.id.pb_photo)
     ProgressBar mPbPhoto;
+    @BindView(R.id.pb_photo_pagination)
+    ProgressBar mPbPhotoPagination;
 
     @BindView(R.id.rv_photo)
     RecyclerView mRvPhoto;
 
     private IMainPresenter mIMainPresenter;
     private int mPage;
+    private PhotosAdapter photosAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements IMain {
 
     @Override
     public void showPhotosByPage(PhotoResponse photoResponse) {
-        ((PhotosAdapter) mRvPhoto.getAdapter()).setPhotos(photoResponse.getPhotos());
+        photosAdapter.setPhotos(photoResponse.getPhotos());
     }
 
     @Override
@@ -61,8 +64,18 @@ public class MainActivity extends AppCompatActivity implements IMain {
     }
 
     @Override
-    public void showProgressbar() {
+    public void showProgressBar() {
         mPbPhoto.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showProgressBarByPage() {
+        mPbPhotoPagination.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgressBarByPage() {
+        mPbPhotoPagination.setVisibility(View.GONE);
     }
 
     private void init() {
@@ -78,7 +91,22 @@ public class MainActivity extends AppCompatActivity implements IMain {
         display.getSize(size);
         int width = size.x / span;
 
-        mRvPhoto.setAdapter(new PhotosAdapter(this, width));
-    }
+        photosAdapter = new PhotosAdapter(this, width);
+        mRvPhoto.setAdapter(photosAdapter);
 
+        mRvPhoto.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                if(dy > 0){
+                    int visibleItemCount = mLayoutManager.getChildCount();
+                    int totalItemCount = mLayoutManager.getItemCount();
+                    int pastVisiblesItems = mLayoutManager.findFirstVisibleItemPosition();
+
+                    if ((visibleItemCount + pastVisiblesItems) >= totalItemCount){
+                        mIMainPresenter.getPhotosByPage(++mPage);
+                    }
+                }
+            }
+        });
+    }
 }
