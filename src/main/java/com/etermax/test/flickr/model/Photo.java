@@ -1,0 +1,44 @@
+package com.etermax.test.flickr.model;
+
+import java.io.Serializable;
+
+/**
+ * Created by Mendez Fernandez on 27/12/2016.
+ */
+
+public class Photo implements Serializable {
+
+    private long id;
+    private String owner;
+    private String secret;
+    private int server;
+    private String title;
+
+    public Photo(long id, String owner, String secret, int server, String title) {
+        this.id = id;
+        this.owner = owner;
+        this.secret = secret;
+        this.server = server;
+        this.title = title;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public String getSecret() {
+        return secret;
+    }
+
+    public int getServer() {
+        return server;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+}
