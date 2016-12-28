@@ -9,13 +9,15 @@ import java.io.Serializable;
 public class Photo implements Serializable {
 
     private long id;
+    private int farm;
     private String owner;
     private String secret;
     private int server;
     private String title;
 
-    public Photo(long id, String owner, String secret, int server, String title) {
+    public Photo(long id, int farm, String owner, String secret, int server, String title) {
         this.id = id;
+        this.farm = farm;
         this.owner = owner;
         this.secret = secret;
         this.server = server;
@@ -24,6 +26,10 @@ public class Photo implements Serializable {
 
     public long getId() {
         return id;
+    }
+
+    public int getFarm() {
+        return farm;
     }
 
     public String getOwner() {

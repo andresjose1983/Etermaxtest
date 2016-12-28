@@ -25,20 +25,24 @@ public class MainInteractor {
     }
 
     public void getPhotosByPage(final int page){
+        mIMainPresenter.showProgressbar();
         try {
             Call<PhotosHeader> photos = RestClient.getPhotos(page);
             photos.enqueue(new Callback<PhotosHeader>() {
                 @Override
                 public void onResponse(Call<PhotosHeader> call, Response<PhotosHeader> response) {
+                    mIMainPresenter.hideProgressBar();
                     mIMainPresenter.showPhotosByPage(response.body().getPhotos());
                 }
 
                 @Override
                 public void onFailure(Call<PhotosHeader> call, Throwable t) {
+                    mIMainPresenter.hideProgressBar();
                     mIMainPresenter.showError(t.getMessage());
                 }
             });
         } catch (IOException e) {
+            mIMainPresenter.hideProgressBar();
             mIMainPresenter.showError(e.getMessage());
         }
     }

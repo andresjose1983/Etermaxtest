@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Etermax test</string>
+    <string name="grid_action">Grid</string>
+    <string name="list_action">List</string>
 </resources>

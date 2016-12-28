@@ -31,4 +31,14 @@ public class MainPresenter implements IMainPresenter {
     public void showError(String error) {
         mIMain.showError(error);
     }
+
+    @Override
+    public void showProgressbar() {
+        mIMain.showProgressbar();
+    }
+
+    @Override
+    public void hideProgressBar() {
+        mIMain.hideProgressBar();
+    }
 }
