@@ -19,7 +19,6 @@ public class MainPresenter implements IMainPresenter {
 
     @Override
     public void getPhotosByPage(int page) {
-        mIMain.showProgressBarByPage();
         mMainInteractor.getPhotosByPage(page);
     }
 
@@ -42,5 +41,20 @@ public class MainPresenter implements IMainPresenter {
     @Override
     public void hideProgressBarByPage() {
         mIMain.hideProgressBarByPage();
+    }
+
+    @Override
+    public void showProgressBar() {
+        mIMain.showProgressBar();
+    }
+
+    @Override
+    public void showProgressBarByPage() {
+        mIMain.showProgressBarByPage();
+    }
+
+    @Override
+    public void search(String text, int page) {
+        mMainInteractor.search(text, page);
     }
 }

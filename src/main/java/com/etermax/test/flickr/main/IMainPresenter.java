@@ -17,4 +17,10 @@ public interface IMainPresenter {
     void hideProgressBar();
 
     void hideProgressBarByPage();
+
+    void showProgressBar();
+
+    void showProgressBarByPage();
+
+    void search(String text, int page);
 }

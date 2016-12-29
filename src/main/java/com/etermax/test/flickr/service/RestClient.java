@@ -52,8 +52,19 @@ public final class RestClient {
         flickrService = retrofit.create(FlickrService.class);
     }
 
+    /**
+     * Get photo by page
+     * @param page
+     * @return
+     * @throws IOException
+     */
     public static Call<PhotosHeader> getPhotos(final int page) throws IOException {
         return flickrService.getPhotos(GET_PHOTOS_RECENT, BuildConfig.API_KEY, PER_PAGE, page,
                 BuildConfig.API_FORMAT, NO_JSON_CALLBACK);
+    }
+
+    public static Call<PhotosHeader> search(final String text, final int page) throws IOException {
+        return flickrService.searchPhotos(GET_PHOTOS_RECENT, BuildConfig.API_KEY, PER_PAGE, page,
+                text, BuildConfig.API_FORMAT, NO_JSON_CALLBACK);
     }
 }

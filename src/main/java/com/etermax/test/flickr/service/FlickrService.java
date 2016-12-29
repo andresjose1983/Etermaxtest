@@ -18,4 +18,13 @@ public interface FlickrService {
                                  @Query("page") int page,
                                  @Query("format") String format,
                                  @Query("nojsoncallback") int nojsoncallback);
+
+    @GET("rest/")
+    Call<PhotosHeader> searchPhotos(@Query("method") String method,
+                      @Query("api_key") String apiKey,
+                      @Query("per_page") int perpage,
+                      @Query("page") int page,
+                      @Query("text") String text,
+                      @Query("format") String format,
+                      @Query("nojsoncallback") int nojsoncallback);
 }

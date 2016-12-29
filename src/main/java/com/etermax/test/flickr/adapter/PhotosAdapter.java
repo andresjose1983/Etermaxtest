@@ -77,4 +77,9 @@ public class PhotosAdapter extends RecyclerView.Adapter<PhotosAdapter.PhotoViewH
             ButterKnife.bind(this, itemView);
         }
     }
+
+    public void clear(){
+        mPhotos.clear();
+        notifyDataSetChanged();
+    }
 }
