@@ -1,5 +1,8 @@
 package com.etermax.test.flickr.main;
 
+import android.widget.ImageView;
+
+import com.etermax.test.flickr.model.Photo;
 import com.etermax.test.flickr.model.PhotoResponse;
 
 /**
@@ -45,4 +48,11 @@ public interface IMain {
      * Hide progress bar pagination
      */
     void hideProgressBarByPage();
+
+    /**
+     * Go to PhotoDetail activity
+     * @param photo
+     * @param imageView
+     */
+    void goToPhotoDetail(Photo photo, ImageView imageView);
 }

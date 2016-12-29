@@ -2,8 +2,11 @@ package com.etermax.test.flickr.service;
 
 import com.etermax.test.flickr.App;
 import com.etermax.test.flickr.BuildConfig;
+import com.etermax.test.flickr.model.PhotoDetailReponse;
 import com.etermax.test.flickr.model.PhotosHeader;
+
 import java.io.IOException;
+
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -19,7 +22,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public final class RestClient {
 
     private static FlickrService flickrService;
-    private final static String GET_PHOTOS_RECENT = "flickr.photos.getRecent";
+    private static final String METHOD_GET_RECENT_PHOTOS = "flickr.photos.getRecent";
+    private static final String METHOD_SEARCH_PHOTOS = "flickr.photos.search";
+    private static final String METHOD_GET_PHOTO_INFO = "flickr.photos.getInfo";
     private final static int PER_PAGE = 20;
     private final static int NO_JSON_CALLBACK = 1;
 
@@ -54,17 +59,38 @@ public final class RestClient {
 
     /**
      * Get photo by page
+     *
      * @param page
      * @return
      * @throws IOException
      */
     public static Call<PhotosHeader> getPhotos(final int page) throws IOException {
-        return flickrService.getPhotos(GET_PHOTOS_RECENT, BuildConfig.API_KEY, PER_PAGE, page,
+        return flickrService.getPhotos(METHOD_GET_RECENT_PHOTOS, BuildConfig.API_KEY, PER_PAGE, page,
                 BuildConfig.API_FORMAT, NO_JSON_CALLBACK);
     }
 
+    /**
+     * Get photo by text
+     *
+     * @param text
+     * @param page
+     * @return
+     * @throws IOException
+     */
     public static Call<PhotosHeader> search(final String text, final int page) throws IOException {
-        return flickrService.searchPhotos(GET_PHOTOS_RECENT, BuildConfig.API_KEY, PER_PAGE, page,
+        return flickrService.searchPhotos(METHOD_SEARCH_PHOTOS, BuildConfig.API_KEY, PER_PAGE, page,
                 text, BuildConfig.API_FORMAT, NO_JSON_CALLBACK);
+    }
+
+    /**
+     * Get photo detail by id
+     *
+     * @param photoId
+     * @return
+     * @throws IOException
+     */
+    public static Call<PhotoDetailReponse> getPhotoDetail(final long photoId) throws IOException {
+        return flickrService.getPhotoDetail(METHOD_GET_PHOTO_INFO, BuildConfig.API_KEY, photoId,
+                BuildConfig.API_FORMAT, NO_JSON_CALLBACK);
     }
 }

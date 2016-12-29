@@ -75,6 +75,8 @@ public class PhotosAdapter extends RecyclerView.Adapter<PhotosAdapter.PhotoViewH
         public PhotoViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(view ->
+                    mIMain.goToPhotoDetail(mPhotos.get(getAdapterPosition()), mIvPhoto));
         }
     }
 

@@ -13,6 +13,7 @@ import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -20,6 +21,7 @@ import com.etermax.test.flickr.adapter.PhotosAdapter;
 import com.etermax.test.flickr.main.IMain;
 import com.etermax.test.flickr.main.IMainPresenter;
 import com.etermax.test.flickr.main.MainPresenter;
+import com.etermax.test.flickr.model.Photo;
 import com.etermax.test.flickr.model.PhotoResponse;
 
 import butterknife.BindView;
@@ -134,6 +136,11 @@ public class MainActivity extends AppCompatActivity implements IMain, SearchView
     @Override
     public boolean onQueryTextChange(String newText) {
         return false;
+    }
+
+    @Override
+    public void goToPhotoDetail(Photo photo, ImageView imageView) {
+        PhotoDetailActivity.show(this, photo, imageView);
     }
 
     /**
