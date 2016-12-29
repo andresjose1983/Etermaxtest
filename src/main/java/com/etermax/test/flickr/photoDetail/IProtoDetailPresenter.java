@@ -9,7 +9,15 @@ import com.etermax.test.flickr.model.PhotoInfo;
 
 public interface IProtoDetailPresenter extends IPhotoDetail{
 
+    /**
+     * Show photo detail
+     * @param photoInfo
+     */
     void showPhotoDetail(PhotoInfo photoInfo);
 
+    /**
+     * Get photo detail
+     * @param photo
+     */
     void getPhotoDetail(Photo photo);
 }

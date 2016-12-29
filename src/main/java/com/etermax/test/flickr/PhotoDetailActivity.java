@@ -2,7 +2,6 @@ package com.etermax.test.flickr;
 
 import android.content.Intent;
 import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -10,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -18,6 +18,9 @@ import com.etermax.test.flickr.model.PhotoInfo;
 import com.etermax.test.flickr.photoDetail.IPhotoDetail;
 import com.etermax.test.flickr.photoDetail.IProtoDetailPresenter;
 import com.etermax.test.flickr.photoDetail.PhotoDetailPresenter;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,15 +33,21 @@ public class PhotoDetailActivity extends AppCompatActivity implements IPhotoDeta
     Toolbar mTbPhoto;
     @BindView(R.id.pb_photo)
     ProgressBar mPbPhoto;
+    @BindView(R.id.tv_date)
+    TextView mTvDate;
+    @BindView(R.id.tv_user)
+    TextView mTvUser;
+    @BindView(R.id.tv_description)
+    TextView mTvDescription;
 
     private IProtoDetailPresenter mIProtoDetailPresenter;
     private Photo mPhoto;
-    private final static String PHOTO_INTENT = "com.etermax.test.flickr.intent.CUSTOMER";
+    private final static String PHOTO_DETAIL_INTENT = "com.etermax.test.flickr.intent.PHOTO_DETAIL_INTENT";
 
 
     public static void show(MainActivity mainActivity, Photo photo, ImageView mIvPhoto){
         Intent intent = new Intent(mainActivity, PhotoDetailActivity.class)
-                .putExtra(PHOTO_INTENT, photo);
+                .putExtra(PHOTO_DETAIL_INTENT, photo);
 
         ActivityOptionsCompat options = ActivityOptionsCompat.
                 makeSceneTransitionAnimation(mainActivity, mIvPhoto, "photo");
@@ -65,7 +74,7 @@ public class PhotoDetailActivity extends AppCompatActivity implements IPhotoDeta
     }
 
     private void init(){
-        mPhoto = (Photo) getIntent().getExtras().getSerializable(PHOTO_INTENT);
+        mPhoto = (Photo) getIntent().getExtras().getSerializable(PHOTO_DETAIL_INTENT);
 
         mTbPhoto.setTitle(mPhoto.getTitle());
         setSupportActionBar(mTbPhoto);
@@ -106,7 +115,11 @@ public class PhotoDetailActivity extends AppCompatActivity implements IPhotoDeta
 
     @Override
     public void showPhotoDetail(PhotoInfo photoInfo) {
-
+        mTvUser.setText(photoInfo.getOwner().getUsername());
+        mTvDescription.setText(photoInfo.getDescription().getContent());
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(photoInfo.getDates().getPosted());
+        mTvDate.setText(new SimpleDateFormat("EEEE MMMM d HH:mm:ss z yyyy").format(calendar.getTime()));
     }
 
     @Override

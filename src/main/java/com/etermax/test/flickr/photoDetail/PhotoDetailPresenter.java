@@ -17,26 +17,44 @@ public class PhotoDetailPresenter implements IProtoDetailPresenter {
         mPhotoDetailInteractor = new PhotoDetailInteractor(this);
     }
 
+    /**
+     * Hide progressbar
+     */
     @Override
     public void hideProgressBar() {
         mIPhotoDetail.hideProgressBar();
     }
 
+    /**
+     * Show progressbar
+     */
     @Override
     public void showProgressBar() {
         mIPhotoDetail.showProgressBar();
     }
 
+    /**
+     * Show photo detail
+     * @param photoInfo
+     */
     @Override
     public void showPhotoDetail(PhotoInfo photoInfo) {
         mIPhotoDetail.showPhotoDetail(photoInfo);
     }
 
+    /**
+     * Get photo detail from server
+     * @param photo
+     */
     @Override
     public void getPhotoDetail(Photo photo) {
         mPhotoDetailInteractor.getPhotoDetail(photo);
     }
 
+    /**
+     * Show server error
+     * @param error
+     */
     @Override
     public void showError(String error) {
         mIPhotoDetail.showError(error);

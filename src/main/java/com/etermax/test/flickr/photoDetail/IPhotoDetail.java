@@ -8,11 +8,25 @@ import com.etermax.test.flickr.model.PhotoInfo;
 
 public interface IPhotoDetail {
 
+    /**
+     * Hide progressbar
+     */
     void hideProgressBar();
 
+    /**
+     * Show progressbar
+     */
     void showProgressBar();
 
+    /**
+     * Show photo detail
+     * @param photoInfo
+     */
     void showPhotoDetail(PhotoInfo photoInfo);
 
+    /**
+     * Show server error
+     * @param error
+     */
     void showError(String error);
 }

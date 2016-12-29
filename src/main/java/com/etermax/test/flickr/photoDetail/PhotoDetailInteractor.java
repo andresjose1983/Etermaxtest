@@ -22,6 +22,10 @@ public class PhotoDetailInteractor {
         this.mIProtoDetailPresenter = mIProtoDetailPresenter;
     }
 
+    /**
+     * Get photo detail from server
+     * @param photo
+     */
     public void getPhotoDetail(Photo photo) {
         mIProtoDetailPresenter.showProgressBar();
         try {
